@@ -1,5 +1,9 @@
 package com.example.truongnm.mvp.api
 
+import com.example.truongnm.mvp.models.Album
+import com.example.truongnm.mvp.models.Post
+import com.example.truongnm.mvp.models.User
+import com.example.truongnm.mvp.util.Constants
 import io.reactivex.Observable
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
