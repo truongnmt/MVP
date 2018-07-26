@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.truongnm.mvp.R
+import com.example.truongnm.mvp.di.component.DaggerFragmentComponent
 import com.example.truongnm.mvp.di.module.FragmentModule
+import kotlinx.android.synthetic.main.fragment_about.*
 import javax.inject.Inject
 
 class AboutFragment: Fragment(), AboutContract.View {
@@ -24,12 +26,12 @@ class AboutFragment: Fragment(), AboutContract.View {
         injectDependency()
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootView = inflater!!.inflate(R.layout.fragment_about, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        rootView = inflater.inflate(R.layout.fragment_about, container, false)
         return rootView
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.attach(this)
         presenter.subscribe()
@@ -67,6 +69,6 @@ class AboutFragment: Fragment(), AboutContract.View {
     }
 
     companion object {
-        val TAG: String = "AboutFragment"
+        const val TAG: String = "AboutFragment"
     }
 }

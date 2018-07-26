@@ -25,19 +25,19 @@ class ListAdapter(private val context: Context, private val list: MutableList<Po
         return list.size
     }
 
-    override fun onBindViewHolder(holder: ListViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         var post = list[position]
 
         // holder!!.bind(post)
-        holder!!.title!!.setText(post.title)
-        holder.body!!.setText(post.body)
+        holder.title.text = post.title
+        holder.body.text = post.body
 
-        holder.layout!!.setOnClickListener {
-            listener.itemDetail(post.id.toString()!!)
+        holder.layout.setOnClickListener {
+            listener.itemDetail(post.id.toString())
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.item_layout, parent, false)
         return ListAdapter.ListViewHolder(itemView)
     }
@@ -48,14 +48,14 @@ class ListAdapter(private val context: Context, private val list: MutableList<Po
     }
 
     class ListViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        var layout = itemView.findViewById<ConstraintLayout>(R.id.item_layout)
-        val title = itemView.findViewById<TextView>(R.id.item_title)
-        val body = itemView.findViewById<TextView>(R.id.item_body)
+        var layout = itemView.findViewById<ConstraintLayout>(R.id.item_layout)!!
+        val title = itemView.findViewById<TextView>(R.id.item_title)!!
+        val body = itemView.findViewById<TextView>(R.id.item_body)!!
 
-        fun bind(item: Post) {
-            // title = item.post
-            // body etc.
-        }
+//        fun bind(item: Post) {
+//             title = item.post
+//             body etc.
+//        }
     }
 
     interface onItemClickListener {

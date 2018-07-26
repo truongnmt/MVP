@@ -20,7 +20,8 @@ import javax.inject.Inject
 
 class ListFragment: Fragment(), ListContract.View, ListAdapter.onItemClickListener {
 
-    @Inject lateinit var presenter: ListContract.Presenter
+    @Inject
+    lateinit var presenter: ListContract.Presenter
 
     private lateinit var rootView: View
 
@@ -33,12 +34,12 @@ class ListFragment: Fragment(), ListContract.View, ListAdapter.onItemClickListen
         injectDependency()
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootView = inflater!!.inflate(R.layout.fragment_list, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        rootView = inflater.inflate(R.layout.fragment_list, container, false)
         return rootView
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.attach(this)
         presenter.subscribe()
@@ -63,11 +64,11 @@ class ListFragment: Fragment(), ListContract.View, ListAdapter.onItemClickListen
     }
 
     override fun loadDataSuccess(list: List<Post>) {
-        var adapter = ListAdapter(activity, list.toMutableList(), this)
-        recyclerView!!.setLayoutManager(LinearLayoutManager(activity))
-        recyclerView!!.setAdapter(adapter)
+        val adapter = ListAdapter(activity!!, list.toMutableList(), this)
+        recyclerView!!.layoutManager = LinearLayoutManager(activity)
+        recyclerView!!.adapter = adapter
 
-        val swipeHandler = object : SwipeToDelete(activity) {
+        val swipeHandler = object : SwipeToDelete(activity!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val adapter = recyclerView.adapter as ListAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
@@ -103,5 +104,6 @@ class ListFragment: Fragment(), ListContract.View, ListAdapter.onItemClickListen
     }
 
     companion object {
-        val TAG: String = "ListFragment"
+        const val TAG: String = "ListFragment"
     }
+}

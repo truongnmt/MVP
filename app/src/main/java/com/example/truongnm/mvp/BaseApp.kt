@@ -2,6 +2,7 @@ package com.example.truongnm.mvp
 
 import android.app.Application
 import com.example.truongnm.mvp.di.component.ApplicationComponent
+import com.example.truongnm.mvp.di.component.DaggerApplicationComponent
 import com.example.truongnm.mvp.di.module.ApplicationModule
 
 class BaseApp: Application() {

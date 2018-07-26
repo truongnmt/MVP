@@ -2,8 +2,13 @@ package com.example.truongnm.mvp.ui.main
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.example.truongnm.mvp.R
+import com.example.truongnm.mvp.di.component.DaggerActivityComponent
 import com.example.truongnm.mvp.di.module.ActivityModule
+import com.example.truongnm.mvp.ui.about.AboutFragment
+import com.example.truongnm.mvp.ui.list.ListFragment
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainContract.View {
@@ -38,7 +43,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun showListFragment() {
         supportFragmentManager.beginTransaction()
                 .disallowAddToBackStack()
-                .setCustomAnimations(AnimType.SLIDE.getAnimPair().first, AnimType.SLIDE.getAnimPair().second)
+                .setCustomAnimations(AnimType.FADE.getAnimPair().first, AnimType.FADE.getAnimPair().second)
                 .replace(R.id.frame, ListFragment().newInstance(), ListFragment.TAG)
                 .commit()
     }
@@ -85,17 +90,15 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         //hello.setText("Hello world with kotlin extensions")
     }
 
-    enum class AnimType() {
+    enum class AnimType {
         SLIDE,
         FADE;
 
         fun getAnimPair(): Pair<Int, Int> {
-            when(this) {
-                SLIDE -> return Pair(R.anim.slide_left, R.anim.slide_right)
-                FADE -> return Pair(R.anim.fade_in, R.anim.fade_out)
+            return when(this) {
+                SLIDE -> Pair(R.anim.slide_left, R.anim.slide_right)
+                FADE -> Pair(R.anim.fade_in, R.anim.fade_out)
             }
-
-            return Pair(R.anim.slide_left, R.anim.slide_right)
         }
     }
 

@@ -30,7 +30,7 @@ class ListPresenter: ListContract.Presenter {
     }
 
     override fun loadData() {
-        var subscribe = api.getPostList().subscribeOn(Schedulers.io())
+        val subscribe = api.getPostList().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ list: List<Post>? ->
                     view.showProgress(false)
@@ -44,7 +44,7 @@ class ListPresenter: ListContract.Presenter {
     }
 
     override fun loadDataAll() {
-        var subscribe = Observable.zip(api.getPostList(), api.getUserList(), api.getAlbumList(),
+        val subscribe = Observable.zip(api.getPostList(), api.getUserList(), api.getAlbumList(),
                 Function3<List<Post>, List<User>, List<Album>, DetailsViewModel> {
                     posts, users, albums ->
                     createDetailsViewModel(posts, users, albums)
